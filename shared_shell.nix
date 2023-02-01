@@ -1,5 +1,4 @@
-{pkgs ? import <nixpkgs> {}}:
-pkgs.mkShell {
+{ pkgs }: {
   buildInputs = with pkgs; [
     alejandra
     rnix-lsp
