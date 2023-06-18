@@ -37,6 +37,16 @@ with builtins;
         sha256 = "IGgJ/D2AGDtbO+RZk2zd+zO9ZtANsle4QSjsh+VOXpg=";
       };
     };
+    block-nvim = pkgs.vimUtils.buildVimPlugin rec {
+      pname = "block.nvim";
+      version = "26fc996788cfecf7c9ebc9ac42f2133094092822";
+      src = pkgs.fetchFromGitHub {
+        owner = "HampusHauffman";
+        repo = "block.nvim";
+        rev = "26fc996788cfecf7c9ebc9ac42f2133094092822";
+        hash = "sha256-i9ZvuaXRPu2duZkjH2y6Sxexf+BfmUdE3YHVKgG6Yz4=";
+      };
+    };
     luafun = pkgs.fetchFromGitHub {
       owner = "luafun";
       repo = "luafun";
@@ -151,6 +161,9 @@ with builtins;
           (omitPluginInVSCode vim-autoread ''
             autocmd VimEnter * nested WatchForChangesAllFile!
           '')
+          (omitPluginInVSCode block-nvim (embedLua ''
+            require("block").setup()
+          ''))
         ];
         extraConfig = concatStringsSep "\n" [
           ''
